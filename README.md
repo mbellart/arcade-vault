@@ -15,4 +15,9 @@ https://github.com/Klerith/fernando-skills
 npx skills@latest add Klerith/fernando-skills
 ```
 
-## Hola Mundo
+## Commands
+
+- `npm run dev` — start the dev server
+- `npm run build` — production build
+- `npm run start` — run the production build
+- `npm run lint` — run ESLint (flat config in `eslint.config.mjs`, extends `eslint-config-next` core-web-vitals + typescript)
