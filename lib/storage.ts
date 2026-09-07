@@ -1,5 +1,7 @@
 // ===== lib/storage.ts — localStorage persistence for mock user/scores =====
 
+import { useSyncExternalStore } from "react";
+
 export interface User {
   name: string;
 }
@@ -36,6 +38,19 @@ export function setUser(user: User | null) {
 
 export function clearUser() {
   setUser(null);
+}
+
+function subscribeUser(callback: () => void) {
+  window.addEventListener(USER_CHANGED_EVENT, callback);
+  window.addEventListener("storage", callback);
+  return () => {
+    window.removeEventListener(USER_CHANGED_EVENT, callback);
+    window.removeEventListener("storage", callback);
+  };
+}
+
+export function useUser(): User | null {
+  return useSyncExternalStore(subscribeUser, getUser, () => null);
 }
 
 export function saveScore(entry: Omit<SavedScore, "at">) {

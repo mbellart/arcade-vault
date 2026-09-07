@@ -2,25 +2,14 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { clearUser, getUser, USER_CHANGED_EVENT, type User } from "@/lib/storage";
+import { useState } from "react";
+import { clearUser, useUser } from "@/lib/storage";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  const [user, setUserState] = useState<User | null>(null);
+  const user = useUser();
   const pathname = usePathname();
   const router = useRouter();
-
-  useEffect(() => {
-    setUserState(getUser());
-    const sync = () => setUserState(getUser());
-    window.addEventListener(USER_CHANGED_EVENT, sync);
-    window.addEventListener("storage", sync);
-    return () => {
-      window.removeEventListener(USER_CHANGED_EVENT, sync);
-      window.removeEventListener("storage", sync);
-    };
-  }, []);
 
   const isActive = (name: "biblioteca" | "salon" | "auth") => {
     if (name === "biblioteca") return pathname === "/" || pathname.startsWith("/juegos");
