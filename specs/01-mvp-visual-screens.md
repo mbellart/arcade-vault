@@ -1,6 +1,6 @@
 # 01 — MVP Visual Screens
 
-**State:** Approved
+**State:** Implemented
 **Depends on:** —
 **Date:** 2026-09-07
 
