@@ -17,13 +17,20 @@ const USER_KEY = "av_user";
 const SCORES_KEY = "av_scores";
 export const USER_CHANGED_EVENT = "av-user-changed";
 
+let cachedUserRaw: string | null = null;
+let cachedUser: User | null = null;
+
 export function getUser(): User | null {
   if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem(USER_KEY);
+  if (raw === cachedUserRaw) return cachedUser;
+  cachedUserRaw = raw;
   try {
-    return JSON.parse(localStorage.getItem(USER_KEY) || "null");
+    cachedUser = raw ? JSON.parse(raw) : null;
   } catch {
-    return null;
+    cachedUser = null;
   }
+  return cachedUser;
 }
 
 export function setUser(user: User | null) {
