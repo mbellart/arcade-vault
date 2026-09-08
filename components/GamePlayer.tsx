@@ -63,7 +63,7 @@ export default function GamePlayer({ game }: { game: Game }) {
           <button className="btn magenta" onClick={endGame}>
             FIN
           </button>
-          <Link href={`/juegos/${game.id}`} className="btn ghost">
+          <Link href={`/games/${game.id}`} className="btn ghost">
             SALIR
           </Link>
         </div>
