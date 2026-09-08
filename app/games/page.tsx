@@ -60,7 +60,7 @@ export default function Library() {
     return GAMES.filter((g) => (cat === "TODOS" || g.cat === cat) && g.title.toLowerCase().includes(q.toLowerCase()));
   }, [q, cat]);
 
-  const goToDetail = (game: Game) => router.push(`/juegos/${game.id}`);
+  const goToDetail = (game: Game) => router.push(`/games/${game.id}`);
 
   return (
     <div className="fade-in">
